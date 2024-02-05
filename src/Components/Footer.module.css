@@ -1,0 +1,46 @@
+.footer{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    column-gap: 35px;
+    padding: 30px;
+}
+
+h2,h3,.nav-list-2{
+    margin-top: 15px;
+}
+
+
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: small;
+    font-weight: 500;
+}
+
+ul a{
+    color: rgba(78, 74, 74, 0.904);
+    text-decoration: none;
+    
+}
+
+ul a:hover{
+    text-decoration: underline;
+}
+
+
+.footer-main-section p{
+    font-size: small;
+    max-width: 300px;
+ text-wrap: wrap;
+}
+
+.footer-nav-section h3{
+
+    font-size: medium;
+    font-weight: bold;
+}
+

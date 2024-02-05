@@ -1,0 +1,59 @@
+.dashboard{
+    display: flex;
+    column-gap: 15px;
+    row-gap: 15px;
+    flex-wrap: wrap;
+    width: 600px;
+    justify-self: start;
+    align-self: self-end;
+}
+
+.close-icon{
+    width: 10px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.dashboard span{
+    text-align: start;
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    font-size: small;
+    padding: 15px;
+    background-color: rgb(202, 202, 202);
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity ease-out .5s;
+}
+
+.override-sorting, .override-filter{
+
+    opacity: 0;
+
+}
+
+
+
+.dashboard-label{
+    
+    font-size: medium;
+    color:rgb(104, 104, 104);
+}
+
+.dashboard select{
+    font-family: "poppins";
+    border: 1px solid rgb(163, 163, 163);
+}
+
+.dashboard-search-bar{
+    flex-basis: 300px;
+    font-family: "poppins";;
+    padding: 5px;
+    border: 1px solid rgb(163, 163, 163);
+}
+
+.dashboard-search-bar:active{
+    border-color: red;
+}

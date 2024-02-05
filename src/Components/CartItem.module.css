@@ -1,0 +1,56 @@
+.cart-item-card {
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(235, 235, 235);
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+  flex-wrap: wrap;
+  height: min(500px, 9rem);
+  padding: .5rem 1rem;
+}
+
+.title {
+  font-weight: bolder;
+  flex-basis: 40%;
+  margin: 0;
+  font-weight: bolder;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.amount-section {
+  height: fit-content;
+  flex-basis: 20%;
+  border-radius: 4px;
+  width: min(40%, 300px);
+  display: flex;
+  border: 1px solid black;
+  border: 1px rgb(230, 230, 230) solid;
+  height: 30px;
+}
+
+
+
+.amount-section input {
+  flex-basis: 50%;
+  width: 50%;
+  border: none;
+  text-align: center;
+}
+
+.amount-section button {
+  background-color: white;
+  flex-basis: 25%;
+  border: none;
+  font-size: medium;
+  color: rgb(56, 131, 244);
+}
+
+.image {
+  flex-basis: 10%;
+  max-width: 10%;
+}

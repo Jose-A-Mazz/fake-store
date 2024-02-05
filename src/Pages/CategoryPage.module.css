@@ -1,0 +1,26 @@
+.bread-crumb-inner-container{
+display: flex;
+row-gap: 1px;
+}
+
+.bread-crumb-inner-container a{
+    /* border: 1px solid black; */
+    padding: 5px;
+    font-size: medium;
+    font-weight: 600;
+    color: rgba(78, 74, 74, 0.904);
+}
+
+
+.items-list a:hover{
+
+    text-decoration: none;
+    
+    }
+    
+
+
+.bread-crumb-outer-container{
+    justify-self: start;
+align-self: self-end;
+}
