@@ -1,0 +1,29 @@
+.coupon{
+ background-color: black;
+ color: white;
+ font-weight: bolder;
+ font-size: 25px;
+ padding: 1%;
+ line-height: 2rem;
+ width: 100%;
+ height: fit-content;
+ text-align: center;
+}
+
+.coupon-code-box{
+    color: black;
+    border-radius: 4px;
+    text-align: center;
+    max-width: fit-content;
+    height: fit-content;
+    padding: 0.5%;
+    background-color: rgb(197, 201, 201);
+    margin: 0 auto;
+    
+}
+
+.coupon-code{
+    font-size: 20px;
+    margin: 0;
+    font-weight: bolder;
+}

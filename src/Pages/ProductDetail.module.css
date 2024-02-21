@@ -1,0 +1,204 @@
+.product-detail-page{
+    display: grid;
+}
+
+
+.product-main-container{
+    margin-top: 125px;
+    display: grid;
+    column-gap: 30px;
+    grid-template-columns: 1fr 300px;
+    width: 50%;
+    justify-self: center;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    height: fit-content;
+}
+/* 
+.product-main-container > *{
+    height: fit-content;
+} */
+
+/* PRODUCT INFO */
+
+.product-info{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 2px;
+    padding: 5%;
+    grid-column: 2;
+    height: 500px;
+}
+
+.product-info p {
+    margin: 0;
+}
+
+.product-info h1{
+    font-size: 20px;
+    font-weight:bolder;
+    margin: 0;
+}
+
+
+.price{
+    color: rgb(87, 85, 85);
+    font-size: 25px;
+    font-weight: 900;
+}
+
+/* Shipping section */
+
+.shipping-items-container{
+
+    display: flex;
+    column-gap: 2%;
+
+}
+
+.shipping-items-container img{
+    height: 20px;
+    flex-basis: 10%;
+}
+
+.shipping-text{
+    height: fit-content;
+    font-size: small;
+    font-weight: 800;
+    color: #528603;
+}
+
+.product-img-main-container{
+    grid-column: 1;
+    width: 100%;
+    /* border: 2px solid green; */
+    max-height: 500px;
+    display: flex;
+}
+
+.product-miniature-container{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+}
+
+.miniature-img{
+    max-height: 115px;
+    width: 70%;
+}
+
+/* IMAGE SECTION */
+
+.image{
+    max-width: 100%;
+    max-height: 100%;
+   }
+
+.product-img-container{
+flex-basis: 80%;
+/* border: 1px solid brown; */
+
+}
+
+.product-miniature-container{
+    flex-basis: 30%;
+}
+
+
+/* CARDS IMAGES  */
+
+.card-img{
+    display: flex;
+    column-gap: 10px;
+    align-items: flex-start;
+}
+.card-img img{
+    max-width: 35px;
+}
+
+.card-img span{
+    font-size: small;
+}
+
+
+/* Icons */
+
+.product-icon{
+    width: 20%;
+    height: 30%
+}
+
+.star-icon{
+    width: 10%;
+    height: 30%;
+}
+
+/* Stock and qty part*/
+
+.in-stock{
+    height: fit-content;
+    flex-basis: 40%;
+    display: flex;
+    column-gap: 10px;
+    margin-top: 10px;
+}
+
+.in-stock p{
+  flex-basis: 50%;
+  font-size: small;
+}
+
+.stock-and-qty{
+    display: flex;
+    height: 60px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.stock-and-qty select{
+    flex-basis: 25%;
+    height: 25px;
+}
+
+
+/* SIZE -CHART */
+
+.size-chart{
+    display: flex;
+    column-gap: 20px;
+    flex-wrap: wrap;
+}
+
+.size-circle{
+    cursor: pointer;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 2px;    
+    text-align: center;
+    border: 1px solid black;
+    margin: 0;
+
+}
+
+.size-text{
+    flex-basis: 100%;
+    margin: 0;
+}
+
+/* button */
+
+.add-to-cart{
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    background-color: #1d75e0;
+    height: 50px;
+    border: none;
+}
+
+.add-to-cart:hover{
+    background-color: rgb(22, 120, 218);
+    
+}

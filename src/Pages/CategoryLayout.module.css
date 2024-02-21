@@ -1,0 +1,19 @@
+.category-page-main-component{
+    display: grid;
+    grid-template-columns: 300px 1fr 100px;
+    row-gap: 20px;
+}
+
+.category-page-main-component > * {
+    grid-column: 2;
+
+}
+
+.category-page-main-component ul{
+    display: flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 30px;
+}
+
