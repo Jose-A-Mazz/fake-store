@@ -129,6 +129,11 @@ flex-basis: 80%;
     height: 30%
 }
 
+.star-icon{
+    width: 10%;
+    height: 30%;
+}
+
 /* Stock and qty part*/
 
 .in-stock{
@@ -188,7 +193,7 @@ flex-basis: 80%;
     cursor: pointer;
     font-weight: bold;
     color: white;
-    background-color: rgb(29, 117, 224);
+    background-color: #1d75e0;
     height: 50px;
     border: none;
 }

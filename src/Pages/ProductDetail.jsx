@@ -3,29 +3,64 @@ import { useDispatch } from "react-redux";
 import Navbar from "../Components/Navbar";
 import styles from "./ProductDetail.module.css";
 import { cardsSourceData } from "../assets/cardImagesData";
-import checkIcon from "../assets/check-icon.svg"
-import shippingIcon from "../assets/shipping-icon.svg"
+import checkIcon from "../assets/check-icon.svg";
+import shippingIcon from "../assets/shipping-icon.svg";
 import { cartSliceActions } from "../store/cartSlice";
+import { useEffect, useState } from "react";
+import starFilled from "../assets/star-filled.svg";
+import halfFilledStar from "../assets/half-filled-star.svg";
+import starEmpty from "../assets/star-empty.svg";
 
 export const ProductDetail = () => {
+  const [stars, setStars] = useState([]);
   const dispatch = useDispatch();
-  let isClothingCategory = false
+  let isClothingCategory = false;
   const productData = useLoaderData();
-  let miniatures = []
+  let miniatures = [];
   let i = 0;
   while (i < 4) {
+    miniatures.push(
+      <img className={styles["miniature-img"]} src={productData.image} />
+    );
 
-    miniatures.push(<img className={styles["miniature-img"]} src={productData.image} />)
-
-    i++
+    i++;
   }
 
-  if (productData.category === "men's clothing" || productData.category === "women's clothing") {
+  if (
+    productData.category === "men's clothing" ||
+    productData.category === "women's clothing"
+  ) {
     isClothingCategory = true;
   }
 
-  
+  const { rate } = productData.rating;
+  const intRate = Math.floor(rate);
+  console.log(rate);
+  const isDecimal = rate !== intRate;
 
+  const rating = [...Array(5)].map((_, i) => {
+    if (isDecimal && intRate + 1 === i + 1) {
+      const decimal = rate - intRate;
+      return (
+        <span>
+          {decimal.toFixed(1) > 0.5 ? (
+            <img className={styles["star-icon"]} src={starFilled} />
+          ) : (
+            <img className={styles["star-icon"]} src={halfFilledStar} />
+          )}
+        </span>
+      );
+    }
+    return i + 1 <= rate ? (
+      <span>
+        <img className={styles["star-icon"]} src={starFilled} />
+      </span>
+    ) : (
+      <span>
+        <img className={styles["star-icon"]} src={starEmpty} />
+      </span>
+    );
+  });
 
   return (
     <>
@@ -43,8 +78,10 @@ export const ProductDetail = () => {
           <div className={styles["product-info"]}>
             <h1>{productData.title}</h1>
             <div className={styles.rating}>
-            <span>{productData.rating.rate}</span>
-            <span>({productData.rating.count})</span>
+              <span>
+                {rate} {rating}
+              </span>
+              <span>({productData.rating.count})</span>
             </div>
             <p className={styles.price}>{`$ ${productData.price}`}</p>
             <div className={styles["card-img"]}>
@@ -53,28 +90,31 @@ export const ProductDetail = () => {
               <img src={cardsSourceData[1]} />
             </div>
             <div className={styles["shipping-items-container"]}>
-              <img src={shippingIcon} className={styles["product-icon"]} alt="" />
-              <p className={styles["shipping-text"]}>This item qualifies for free shipping</p>
+              <img
+                src={shippingIcon}
+                className={styles["product-icon"]}
+                alt=""
+              />
+              <p className={styles["shipping-text"]}>
+                This item qualifies for free shipping
+              </p>
             </div>
-            {isClothingCategory && <div className={styles["size-chart"]}>
-              <p className={styles["size-text"]}>Size:</p>
-              <div className={styles["size-circle"]}>
-                S
+            {isClothingCategory && (
+              <div className={styles["size-chart"]}>
+                <p className={styles["size-text"]}>Size:</p>
+                <div className={styles["size-circle"]}>S</div>
+                <div className={styles["size-circle"]}>M</div>
+                <div className={styles["size-circle"]}>L</div>
+                <div className={styles["size-circle"]}>XL</div>
               </div>
-              <div className={styles["size-circle"]}>
-                M
-              </div>
-              <div className={styles["size-circle"]}>
-                L
-              </div>
-              <div className={styles["size-circle"]}>
-                XL
-              </div>
-            </div>
-            }
+            )}
             <div className={styles["stock-and-qty"]}>
               <div className={styles["in-stock"]}>
-                <img src={checkIcon} className={styles["product-icon"]} alt="check-icon" />
+                <img
+                  src={checkIcon}
+                  className={styles["product-icon"]}
+                  alt="check-icon"
+                />
                 <p>In Stock</p>
               </div>
               <select name="qty-select" id="qty">
@@ -84,11 +124,15 @@ export const ProductDetail = () => {
                 <option value="4">4</option>
               </select>
             </div>
-            <button onClick={dispatch.bind(null, cartSliceActions.addToCart(productData))} className={styles["add-to-cart"]}>
+            <button
+              onClick={dispatch.bind(
+                null,
+                cartSliceActions.addToCart(productData)
+              )}
+              className={styles["add-to-cart"]}
+            >
               Add to Cart
             </button>
-
-
           </div>
         </section>
       </main>

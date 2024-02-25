@@ -9,12 +9,9 @@
     height: 450px;
     box-shadow: 0px 0px 2px 3px rgba(216, 216, 216, 0.2);
     cursor: pointer;
-    transition: order, box-shadow ease .5s;
 }
 
-.product-card:hover{
-    box-shadow: 0px 0px 5px 6px rgba(0,0,0,0.1) ;
-}
+
 
 .product-image{
     max-height: 200px;

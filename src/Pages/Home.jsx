@@ -4,46 +4,63 @@ import womanCard from "../assets/woman-display-card.jpg";
 import { useRouteLoaderData } from "react-router-dom";
 import { ItemsCarousel } from "../Components/ItemsCarousel";
 import { Coupon } from "../Components/Coupon";
-import Navbar from "../Components/Navbar";
+import NavBar from "../Components/Navbar";
 import { Footer } from "../Components/Footer";
 import { useEffect } from "react";
 import { MainHeader } from "../Components/MainHeader";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { current } from "@reduxjs/toolkit";
+import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "../utils/fetchAllProducts";
+import { fetchHomePageData } from "../utils/fetchHomePageData";
+import Bento from "../Components/Bento";
 
 export const Home = () => {
-  const { featuredItems } = useRouteLoaderData("home-page-category-data");
-  const intersectingElement = useRef();
+  const ref = useRef();
+  // const { featuredItems } = useRouteLoaderData("home-page-category-data");
+  let scrollStarted = false;
+
+  const { data, error, isError, isLoading } = useQuery({
+    staleTime: 20000,
+    queryKey: ["products", "home-products"],
+    queryFn: fetchHomePageData,
+  });
 
   useEffect(() => {
-    let options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0,
-    };
+    function eventFn() {
+      if (scrollY > 300 && !scrollStarted) {
+        ref.current.style.top = `${scrollY}px`;
 
-    const callback = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          console.log("Hello");
-        }
-      });
-    };
+        setTimeout(() => {
+          ref.current.style.top = 0;
+          ref.current.style.transition = "none";
+          ref.current.style.position = "sticky";
+          ref.current.style.boxShadow = "0px 1px 2px 3px rgba(0,0,0,0.1)";
+          scrollStarted = true;
+        }, 800);
+      }
 
-    let observer = new IntersectionObserver(callback, options);
+      if (scrollY === 0 && scrollStarted) {
+        ref.current.style.position = "relative";
+        ref.current.style.transition = "all 600ms ease";
+        ref.current.style.boxShadow = "none";
+        scrollStarted = false;
+      }
+    }
 
-    observer.observe(intersectingElement.current);
-  }, []);
+    window.addEventListener("scroll", eventFn);
+  }, [scrollStarted]);
 
   return (
     <>
-      <Navbar />
+      <NavBar ref={ref} />
       <main>
-        <MainHeader />
+        {!isLoading && <MainHeader images={data.imagesUrl} />}
+        <Bento itemsByCategory={data.itemsByCategory} />
         <section className={styles["featured-items-section"]}>
-          <h2 ref={intersectingElement}>What People are Buying</h2>
-          <ItemsCarousel items={featuredItems} />
+          <h2 id="intersecting-element">What People are Buying</h2>
+          {!isLoading && <ItemsCarousel items={data.featuredItems} />}
         </section>
-
         <section id="card-section" className={styles["display-card-section"]}>
           <div className={styles["card-container"]}>
             <img
@@ -68,7 +85,6 @@ export const Home = () => {
             </div>
           </div>
         </section>
-
         <section className={styles["coupon-section"]}>
           <Coupon />
         </section>
@@ -79,3 +95,12 @@ export const Home = () => {
     </>
   );
 };
+
+export async function loader() {
+  await queryClient.prefetchQuery({
+    queryKey: ["products", "home-products"],
+    queryFn: fetchHomePageData,
+  });
+
+  return null;
+}

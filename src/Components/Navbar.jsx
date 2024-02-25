@@ -1,31 +1,32 @@
 import { Link, NavLink } from "react-router-dom";
-import styles from "./Navbar.module.css";
-import cartImg from "../assets/Cart.svg";
-import { useSelector } from "react-redux";
+import "../App.css";
+import { useEffect, forwardRef } from "react";
+import { motion } from "framer-motion";
+import Cart from "./Cart";
 
-export default function Navbar() {
-  const totalItems = useSelector((state) => state.cart.totalItems);
-
+const NavBar = forwardRef(function NavBar(props, ref) {
   return (
-    <nav className={styles.nav}>
-      <div className={styles["title-container"]}>
-        <h1>New Century Stores</h1>
+    <nav className="nav" ref={ref}>
+      <div className="title-container">
+        <Link to="/">
+          <h1 style={{ color: "black" }}>New Century Stores</h1>
+        </Link>
       </div>
 
-      <ul className={styles.list}>
-        <li>
+      <ul className="list">
+        <li layoutId="nav-link">
           <NavLink
             end
             to="/categories"
-            className={({ isActive }) => (isActive ? styles.active : undefined)}
+            className={({ isActive }) => (isActive ? "active" : undefined)}
           >
             All Categories
           </NavLink>
         </li>
-        <li>
+        <li layoutId="nav-link">
           <NavLink
             to="/categories/electronics"
-            className={({ isActive }) => (isActive ? styles.active : undefined)}
+            className={({ isActive }) => (isActive ? "active" : undefined)}
           >
             Electronics
           </NavLink>
@@ -33,7 +34,7 @@ export default function Navbar() {
         <li>
           <NavLink
             to="/categories/jewelery"
-            className={({ isActive }) => (isActive ? styles.active : undefined)}
+            className={({ isActive }) => (isActive ? "active" : undefined)}
           >
             Jewelery
           </NavLink>
@@ -41,7 +42,7 @@ export default function Navbar() {
         <li>
           <NavLink
             to="/categories/men's clothing"
-            className={({ isActive }) => (isActive ? styles.active : undefined)}
+            className={({ isActive }) => (isActive ? "active" : undefined)}
           >
             Men's Clothing
           </NavLink>
@@ -49,24 +50,15 @@ export default function Navbar() {
         <li>
           <NavLink
             to="/categories/women's clothing"
-            className={({ isActive }) => (isActive ? styles.active : undefined)}
+            className={({ isActive }) => (isActive ? "active" : undefined)}
           >
             Women's Clothing
           </NavLink>
         </li>
       </ul>
-      <Link className={styles["cart-link"]} to="/cart">
-        <div className={styles["logo-container"]}>
-          <p className={styles["cart-counter"]}>{totalItems}</p>
-
-          <div className={styles["cart-divider"]}></div>
-          <img
-            className={styles["cart-logo"]}
-            src={cartImg}
-            alt="shopping cart image"
-          />
-        </div>
-      </Link>
+      <Cart />
     </nav>
   );
-}
+});
+
+export default NavBar;

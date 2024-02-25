@@ -3,20 +3,8 @@ import { useState, useEffect, useCallback } from "react";
 
 export default function Carousel({ images }) {
   const slide = useRef();
-  const [clickCounter, setClickCounter] = useState(1);
+  const [indexOfImage, setIndexOfImage] = useState(0);
   const [carouselStarted, setCarouselStarted] = useState(false);
-  const [innerContainerStyles, setInnerContainerStyles] = useState({
-    transition: "all 250ms ease-out",
-    transform: "translateX(-100%)",
-  });
-  const [allImages, setAllImages] = useState(createImageSlider(images));
-
-  function createImageSlider(images) {
-    let setOfImages = [...images];
-    setOfImages.push(setOfImages[0]);
-    setOfImages.unshift(setOfImages[setOfImages.length - 2]);
-    return setOfImages;
-  }
 
   const styleObject = {
     height: "80vh",
@@ -28,86 +16,26 @@ export default function Carousel({ images }) {
     flex: "0 0 auto",
   };
 
-  const resetCarouselLeft = useCallback(() => {
-    setInnerContainerStyles({
-      transition: "none",
-      transform: `translateX(${-(allImages.length - 2) * 100}%)`,
-    });
-  }, []);
-
-  const resetCarouselRight = useCallback(() => {
-    setInnerContainerStyles({
-      transition: "none",
-      transform: `translateX(${
-        -(allImages.length - (allImages.length - 1)) * 100
-      }%)`,
-    });
-  }, []);
-
   useEffect(() => {
-    const slidingInterval = setInterval(moveLeft, 4000);
+    const sliderInterval = setInterval(moveRight, 4000);
+
     return () => {
-      clearInterval(slidingInterval);
+      clearInterval(sliderInterval);
     };
-  }, [clickCounter]);
-
-  useEffect(() => {
-    if (!carouselStarted) {
-      setCarouselStarted(true);
-    } else {
-      console.log(clickCounter);
-      slide.current.removeEventListener(
-        "transitionend",
-        resetCarouselLeft,
-        false
-      );
-
-      slide.current.removeEventListener(
-        "transitionend",
-        resetCarouselRight,
-        false
-      );
-      setInnerContainerStyles({
-        transition: "all  250ms ease-out",
-        transform: `translateX(${clickCounter * -100}%)`,
-      });
-
-      if (clickCounter === 0) {
-        slide.current.addEventListener(
-          "transitionend",
-          resetCarouselLeft,
-          false
-        );
-      }
-
-      if (clickCounter === allImages.length - 1) {
-        slide.current.addEventListener(
-          "transitionend",
-          resetCarouselRight,
-          false
-        );
-      }
-    }
-  }, [clickCounter]);
+  }, [indexOfImage]);
 
   function moveLeft() {
-    if (clickCounter === 0) {
-      setClickCounter(allImages.length - 3);
-    } else if (clickCounter === allImages.length - 1) {
-      setClickCounter(0);
-    } else {
-      setClickCounter((clickCounter) => clickCounter - 1);
-    }
+    setIndexOfImage((prevIndex) => {
+      if (prevIndex === 0) return images.length - 1;
+      return prevIndex - 1;
+    });
   }
 
   function moveRight() {
-    if (clickCounter === allImages.length - 1) {
-      setClickCounter(allImages.length - 3);
-    } else if (clickCounter === 0) {
-      setClickCounter(allImages.length - 1);
-    } else {
-      setClickCounter((clickCounter) => clickCounter + 1);
-    }
+    setIndexOfImage((prevIndex) => {
+      if (prevIndex === images.length - 1) return 0;
+      return prevIndex + 1;
+    });
   }
   return (
     <>
@@ -115,11 +43,17 @@ export default function Carousel({ images }) {
         <div
           ref={slide}
           className="inner-container"
-          style={innerContainerStyles}
+          style={{
+            transition: "all 300ms ease-in-out",
+            transform: `translateX(-${indexOfImage * 100}%)`,
+          }}
         >
-          {allImages.map((image) => (
+          {images.map((image) => (
             <div
-              style={{ backgroundImage: `url(${image})`, ...styleObject }}
+              style={{
+                backgroundImage: `url(${image.url})`,
+                ...styleObject,
+              }}
             ></div>
           ))}
         </div>
@@ -129,6 +63,21 @@ export default function Carousel({ images }) {
         <button onClick={moveRight} className="carousel-prev">
           &gt;
         </button>
+        <div className="dot-points-container">
+          {images.map((image, index) => {
+            return (
+              <button
+                onClick={() => setIndexOfImage(index)}
+                key={image.url}
+                className={
+                  index === indexOfImage ? "dot-btn current-img-btn" : "dot-btn"
+                }
+              >
+                .
+              </button>
+            );
+          })}
+        </div>
       </div>
     </>
   );

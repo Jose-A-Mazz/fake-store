@@ -1,78 +1,75 @@
 import { useLoaderData, Link } from "react-router-dom";
 import { ProductCard } from "../Components/ProductCard";
 import { Dashboard } from "../Components/Dashboard";
-import { useSelector } from "react-redux";
-import { useReducer } from "react";
+import { CSSProperties } from "react";
 import useSortAndSearch from "../hooks/useSortAndSearch";
-import styles from "./ListOfCategories.module.css"
-
-
+import styles from "./ListOfCategories.module.css";
+import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "../utils/fetchAllProducts";
+import { fetchHomePageData } from "../utils/fetchHomePageData";
+import { motion } from "framer-motion";
+import LoadingIndicator from "../Components/LoadingIndicator";
 
 export const ListOfCategories = () => {
-  // const searchResults = useSelector(state => state.search.filteredArray)
-  const items = useLoaderData();
-  const {sortingHandler, categoryState, searchHandler, toSort} = useSortAndSearch(items)
-  let itemsArray = [];
+  const { data, error, isError, isLoading } = useQuery({
+    querykey: ["products", "home-products"],
+    queryFn: fetchHomePageData,
+    staleTime: 10000,
+  });
 
+  let products;
+
+  if (data) products = data.products;
+
+  const { sortingHandler, categoryState, searchHandler, toSort } =
+    useSortAndSearch(products || []);
+  let itemsArray = [];
 
   if (categoryState.searchedItemsArray.length > 0) {
     itemsArray = categoryState.searchedItemsArray;
   } else {
-    itemsArray = [...items];
+    itemsArray = !products ? [] : [...products];
   }
 
   if (categoryState.sortType !== "") {
-    toSort(categoryState.sortType, itemsArray)
+    toSort(categoryState.sortType, itemsArray);
   }
-
 
   return (
     <>
-      <div style={{ height: "200px" }}>
-
-      </div>
-      <Dashboard items={items} onSort={sortingHandler} currentlySorted={categoryState.sortType} searchHandler={searchHandler}/>
-      <ul className={styles["items-list"]}>
-
-        {itemsArray.map((item) => (
-          <Link key={item.title} to={`${item.category}/${item.id}`} ><li><ProductCard item={item} /> </li></Link>
-        ))}
-      </ul>
+      {isLoading && <LoadingIndicator isLoading={isLoading} />}
+      {!isLoading && (
+        <>
+          <div style={{ height: "200px" }}></div>
+          <Dashboard
+            items={products}
+            onSort={sortingHandler}
+            currentlySorted={categoryState.sortType}
+            searchHandler={searchHandler}
+          />
+          <ul className={styles["items-list"]}>
+            {itemsArray.map((item) => (
+              <Link key={item.title} to={`${item.category}/${item.id}`}>
+                <motion.li layout>
+                  <ProductCard item={item} />{" "}
+                </motion.li>
+              </Link>
+            ))}
+          </ul>{" "}
+        </>
+      )}
     </>
   );
-}
-
-
+};
 
 export async function loader() {
+  // promise resolves before loading the page
+  //response data is stored in the cache
+  //so no need to use useLoader as the cached data returned by useQuery hook
+  //will contain the data returned by fetchQuery
 
-  let array = []
-
-  const urls = [
-    "https://fakestoreapi.com/products/category/men's clothing",
-    "https://fakestoreapi.com/products/category/women's clothing",
-    "https://fakestoreapi.com/products/category/jewelery",
-    "https://fakestoreapi.com/products/category/electronics",
-  ];
-
-  const mappedUrls = urls.map(async (url) => {
-    const response = await fetch(url);
-    const data = await response.json()
-
-    return data
-
+  return queryClient.fetchQuery({
+    queryKey: ["products", "home-products"],
+    queryFn: fetchHomePageData,
   });
-
-
-
-  const results = await Promise.all(mappedUrls);
-
-  results.forEach(result => array.push(...result))
-
-  return array;
 }
-
-
-
-
-

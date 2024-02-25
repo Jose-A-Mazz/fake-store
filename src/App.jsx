@@ -1,22 +1,28 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import { RootLayout, loader as homePageLoader } from "./Pages/RootLayout";
-import { Home } from "./Pages/Home";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./utils/fetchAllProducts";
+import { RootLayout } from "./Pages/RootLayout";
+import { Home, loader as homePageLoader } from "./Pages/Home";
 import {
   ListOfCategories,
   loader as categoryLoader,
 } from "./Pages/ListOfCategories";
 import {
   CategoryPage,
-  loader as categoryPageLoader,
+  // loader as categoryPageLoader,
 } from "./Pages/CategoryPage";
 import { CategoryLayout } from "./Pages/CategoryLayout";
-import { ProductDetail, loader as productDetailLoader } from "./Pages/ProductDetail";
-import CartPage from "./Pages/CartPage"
+import {
+  ProductDetail,
+  loader as productDetailLoader,
+} from "./Pages/ProductDetail";
+import CartPage from "./Pages/CartPage";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
     id: "home-page-category-data",
     loader: homePageLoader,
     children: [
@@ -36,28 +42,30 @@ const router = createBrowserRouter([
           {
             path: ":category",
             element: <CategoryPage />,
-            loader: categoryPageLoader,
-        
           },
-
-        ]
+        ],
       },
-  {
-    path: "/categories/:category/:productId",
-    loader: productDetailLoader,
-    element: <ProductDetail />
+      {
+        path: "/categories/:category/:productId",
+        loader: productDetailLoader,
+        element: <ProductDetail />,
+      },
 
+      {
+        path: "/cart",
+        element: <CartPage />,
+      },
+    ],
   },
-
-  {
-    path: "/cart",
-    element: <CartPage />
-
-  }
-]}])
+]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 }
 
 export default App;
