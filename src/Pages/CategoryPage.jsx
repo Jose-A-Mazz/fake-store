@@ -14,19 +14,23 @@ import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAllProducts, queryClient } from "../utils/fetchAllProducts";
 import LoadingIndicator from "../Components/LoadingIndicator";
+import { fetchHomePageData } from "../utils/fetchHomePageData";
+import { current } from "@reduxjs/toolkit";
 
 export const CategoryPage = () => {
   const params = useParams();
-  console.log(params.category);
   let categoryItems = [];
   const { data, isError, isLoading, error } = useQuery({
-    queryKey: ["products", { category: params.category }],
-    queryFn: ({ signal }) =>
-      fetchAllProducts({ signal, category: params.category }),
+    queryKey: ["products", "home-products"],
+    queryFn: fetchHomePageData,
   });
 
+  const currentItems = data.itemsByCategory.filter(
+    (item) => item.category === params.category
+  )[0].items;
+
   const { sortingHandler, categoryState, dispatcher, toSort, searchHandler } =
-    useSort(data || []);
+    useSort(currentItems || []);
   const location = useLocation();
   let navigation = useNavigation();
 
@@ -41,7 +45,7 @@ export const CategoryPage = () => {
   if (categoryState.searchedItemsArray.length > 0) {
     categoryItems = [...categoryState.searchedItemsArray];
   } else {
-    categoryItems = !data ? [] : [...data];
+    categoryItems = !currentItems ? [] : [...currentItems];
   }
 
   if (categoryState.sortType !== "") {
@@ -49,7 +53,7 @@ export const CategoryPage = () => {
   }
 
   return (
-    <React.Fragment>
+    <>
       {isLoading && <LoadingIndicator isLoading={isLoading} />}
       {!isLoading && (
         <>
@@ -70,7 +74,7 @@ export const CategoryPage = () => {
             </ul>
           </div>
           <Dashboard
-            items={data}
+            items={currentItems}
             onSort={sortingHandler}
             currentlySorted={categoryState.sortType}
             searchHandler={searchHandler}
@@ -84,6 +88,6 @@ export const CategoryPage = () => {
           </ul>
         </>
       )}
-    </React.Fragment>
+    </>
   );
 };

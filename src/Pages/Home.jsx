@@ -26,6 +26,8 @@ export const Home = () => {
     queryFn: fetchHomePageData,
   });
 
+  console.log(data);
+
   useEffect(() => {
     function eventFn() {
       if (scrollY > 300 && !scrollStarted) {
