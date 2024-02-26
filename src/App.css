@@ -1,9 +1,9 @@
-*{
+* {
     box-sizing: border-box
-  }
-  
+}
 
-body{
+
+body {
     font-family: "poppins";
     margin: 1px;
     box-sizing: border-box;
@@ -13,11 +13,11 @@ body{
 main {
     display: grid;
     grid-template-columns: 100px 1fr 100px;
-    justify-items: center ;
+    justify-items: center;
     row-gap: 200px;
 }
 
-main > * {
+main>* {
     grid-column: 2;
 }
 
@@ -25,53 +25,54 @@ main > * {
 /* Carousel Code */
 
 .hero {
-grid-column: 2 ;
- width: 100%;
- height: 80vh;
-  position: relative;
-  padding: 0;
-  overflow: hidden;
+    grid-column: 2;
+    width: 100%;
+    height: 80vh;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
 }
 
-.inner-container{
-display: flex;
-width: 100%;
-/* overflow: hidden; */
-height: auto;
-flex-wrap: nowrap;
+.inner-container {
+    display: flex;
+    width: 100%;
+    /* overflow: hidden; */
+    height: auto;
+    flex-wrap: nowrap;
 }
 
-.carousel-prev, .carousel-next{
-position: absolute;
-top: 50%;
-background-color: white;
-border: 1px solid rgba(187, 187, 187, 0.8);
-padding: 5px;
-width: 50px;
-margin: 0;
-height: 50px;
-font-size: medium;
-color: rgba(33, 133, 248, 0.8);
-font-weight: 500;
-cursor: pointer;
-border-style: none;
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    background-color: white;
+    border: 1px solid rgba(187, 187, 187, 0.8);
+    padding: 5px;
+    width: 50px;
+    margin: 0;
+    height: 50px;
+    font-size: medium;
+    color: rgba(33, 133, 248, 0.8);
+    font-weight: 500;
+    cursor: pointer;
+    border-style: none;
 }
 
-.hero button:hover{
+.hero button:hover {
 
     background-color: rgb(187, 186, 186);
 
 }
 
-.carousel-next{
+.carousel-next {
     left: 0;
 }
 
-.carousel-prev{
+.carousel-prev {
     right: 0;
 }
 
-.dot-points-container{
+.dot-points-container {
     position: absolute;
     bottom: .5rem;
     left: 50%;
@@ -87,24 +88,24 @@ border-style: none;
     justify-content: center;
 }
 
-.dot-btn{
-transition:  all 200ms ease-in-out;
-background-color: rgb(143, 143, 143);
-flex-grow: 1 0 auto;
-cursor: pointer;
-height: 15px;
-border-radius: 50%;
-border: none;
+.dot-btn {
+    transition: all 200ms ease-in-out;
+    background-color: rgb(143, 143, 143);
+    flex-grow: 1 0 auto;
+    cursor: pointer;
+    height: 15px;
+    border-radius: 50%;
+    border: none;
 
 }
 
-.current-img-btn{
-    background-color: rgb(211, 211, 211);    
+.current-img-btn {
+    background-color: rgb(211, 211, 211);
 }
 
 /* NAVBAR */
 
-.nav{
+.nav {
     padding: 1% 2%;
     transition: all 500ms ease;
     margin: none;
@@ -121,7 +122,7 @@ border: none;
 }
 
 /* list of nav links */
-.list{
+.list {
     font-size: medium;
     list-style: none;
     display: flex;
@@ -131,17 +132,18 @@ border: none;
 
 /* Cart*/
 
-.cart-logo{
+.cart-logo {
     width: 25%;
     height: 35%;
 
 }
-.cart-divider{
+
+.cart-divider {
     border: 1px solid #1C274C;
     height: 15px;
 }
 
-.cart-counter{
+.cart-counter {
     margin: none;
     text-align: center;
     font-weight: bold;
@@ -150,12 +152,12 @@ border: none;
     width: 20px;
 }
 
-.counter-text{
+.counter-text {
 
     margin: 0;
 }
 
-.logo-container{
+.logo-container {
     cursor: pointer;
     flex-basis: 10%;
     transition: all ease-out .1s;
@@ -170,14 +172,15 @@ border: none;
     align-content: center;
     flex-wrap: wrap;
 }
-.logo-container:hover{
-    box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.1);
+
+.logo-container:hover {
+    box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.1);
 }
 
 
 /* page title */
 
-.title-container{
+.title-container {
     padding-left: 25px;
     display: flex;
     flex-wrap: wrap;
@@ -186,16 +189,16 @@ border: none;
     justify-content: center;
 }
 
-.title-container h1{
+.title-container h1 {
     margin: 0;
 }
 
 /* activation of links */
 
- .nav a.active{
-    text-decoration: underline ;
+.nav a.active {
+    text-decoration: underline;
     padding: 0.5rem 1rem;
-    
+
     font-weight: bold;
 
 }
@@ -205,9 +208,9 @@ border: none;
 
     transition: all ease-out .2s;
     text-decoration: none;
-} 
+}
 
-.cart-link{
+.cart-link {
     max-width: 150px;
     text-decoration: none;
     height: fit-content;
@@ -215,7 +218,7 @@ border: none;
 }
 
 /* Bento */
-.bento-grid > div {
+.bento-grid>div {
     opacity: 0;
     border-radius: 12px;
     max-width: 100%;
@@ -227,20 +230,20 @@ border: none;
 }
 
 
-.bento-section{
+.bento-section {
     width: 100%;
 }
 
 
 
-.bento-replacement{
+.bento-replacement {
     width: 100%;
     height: 500px;
 }
 
 
 
-.bento-grid{
+.bento-grid {
     margin: auto auto;
     width: 80%;
     gap: 2%;
@@ -248,14 +251,15 @@ border: none;
     height: 500px;
     grid-template: repeat(2, 1fr) / 50px 1fr 1fr;
 }
-.bento-jew{
+
+.bento-jew {
     grid-row: 1;
     grid-column: 2;
-    background-color: red ;
+    background-color: red;
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("./assets/bento-jewelery.jpg");
 }
 
-.bento-jew::before{
+.bento-jew::before {
     content: "Jewelery";
     color: white;
     font-weight: bold;
@@ -266,7 +270,8 @@ border: none;
     transform: translateY(50%);
 
 }
-.bento-ele::before{
+
+.bento-ele::before {
     content: "Electronics";
     color: white;
     font-weight: bold;
@@ -277,7 +282,8 @@ border: none;
     transform: translateY(50%);
 
 }
-.bento-men::before{
+
+.bento-men::before {
     content: "Men";
     color: white;
     font-weight: bold;
@@ -288,7 +294,8 @@ border: none;
     transform: translateY(50%);
 
 }
-.bento-wom::before{
+
+.bento-wom::before {
     content: "Women";
     color: white;
     font-weight: bold;
@@ -300,23 +307,41 @@ border: none;
 
 }
 
-.bento-ele{
+.bento-ele {
     grid-row: 1;
     grid-column: 3;
-    background-color: blue ;
+    background-color: blue;
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("./assets/bento-electronics.avif");
 }
 
-.bento-wom{
+.bento-wom {
     grid-row: 2;
     grid-column: 1 /3;
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("./assets/bento-woman.jpg");
 }
 
-.bento-men{
+.bento-men {
     grid-row: 2;
     grid-column: 3;
     background-color: green;
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("./assets/bento-men.jpg");
 }
 
+
+/* dashboard nav-list */
+
+.dashboard-nav-list {
+    display: flex;
+    flex-direction: column;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.activeLink {
+    padding: .3rem 1rem;
+    background-color: #ececec;
+}
+
+a:hover {
+    text-decoration: none;
+}

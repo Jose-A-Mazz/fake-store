@@ -16,9 +16,11 @@ import { fetchAllProducts, queryClient } from "../utils/fetchAllProducts";
 import LoadingIndicator from "../Components/LoadingIndicator";
 import { fetchHomePageData } from "../utils/fetchHomePageData";
 import { current } from "@reduxjs/toolkit";
+import usePathString from "../hooks/usePathString";
 
 export const CategoryPage = () => {
   const params = useParams();
+  const breadCrumb = usePathString();
   let categoryItems = [];
   const { data, isError, isLoading, error } = useQuery({
     queryKey: ["products", "home-products"],
@@ -31,12 +33,7 @@ export const CategoryPage = () => {
 
   const { sortingHandler, categoryState, dispatcher, toSort, searchHandler } =
     useSort(currentItems || []);
-  const location = useLocation();
   let navigation = useNavigation();
-
-  const pathString = location.pathname.replace("%20", " ").split("/");
-  pathString.splice(0, 1, "Home");
-  const breadCrumb = pathString;
 
   if (navigation.state === "loading" && categoryState.sortType !== "") {
     dispatcher({ type: "REMOVE SORT" });
@@ -62,30 +59,24 @@ export const CategoryPage = () => {
             style={{ height: "50px", marginTop: "150px" }}
           >
             <ul className={styles["bread-crumb-inner-container"]}>
-              {breadCrumb.map((navItem, index) => (
-                <li key={navItem}>
-                  <Link
-                    to={`/${index === 0 ? "" : navItem.toLowerCase()}`}
-                  >{`${navItem}${
-                    index < breadCrumb.length - 1 ? "  >" : ""
-                  }`}</Link>
-                </li>
+              {breadCrumb}
+            </ul>
+          </div>
+          <div style={{ display: "flex", columnGap: "5%", width: "100%" }}>
+            <Dashboard
+              items={currentItems}
+              onSort={sortingHandler}
+              currentlySorted={categoryState.sortType}
+              searchHandler={searchHandler}
+            />
+            <ul className={styles["items-list"]}>
+              {categoryItems.map((item) => (
+                <Link key={item.title} to={`${item.id}`}>
+                  <ProductCard item={item} />
+                </Link>
               ))}
             </ul>
           </div>
-          <Dashboard
-            items={currentItems}
-            onSort={sortingHandler}
-            currentlySorted={categoryState.sortType}
-            searchHandler={searchHandler}
-          />
-          <ul className={styles["items-list"]}>
-            {categoryItems.map((item) => (
-              <Link key={item.title} to={`${item.id}`}>
-                <ProductCard item={item} />
-              </Link>
-            ))}
-          </ul>
         </>
       )}
     </>

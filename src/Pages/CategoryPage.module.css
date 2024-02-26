@@ -1,9 +1,10 @@
-.bread-crumb-inner-container{
-display: flex;
-row-gap: 1px;
+.bread-crumb-inner-container {
+    min-width: 50%;
+    display: flex;
+    row-gap: 1px;
 }
 
-.bread-crumb-inner-container a{
+.bread-crumb-inner-container a {
     /* border: 1px solid black; */
     padding: 5px;
     font-size: medium;
@@ -12,15 +13,15 @@ row-gap: 1px;
 }
 
 
-.items-list a:hover{
+.items-list a:hover {
 
     text-decoration: none;
-    
-    }
-    
+
+}
 
 
-.bread-crumb-outer-container{
+
+.bread-crumb-outer-container {
     justify-self: start;
-align-self: self-end;
+    align-self: self-end;
 }

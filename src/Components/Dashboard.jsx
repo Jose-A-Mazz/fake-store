@@ -5,15 +5,21 @@ import { useSelector } from "react-redux";
 import { sortActions } from "../store/sortSlice";
 import closeIcon from "../assets/close.svg";
 import { useSearch } from "../hooks/useSeach";
+import NavCategories from "./NavCategories";
 
-export const Dashboard = ({ items, onSort, currentlySorted, searchHandler}) => {
+export const Dashboard = ({
+  items,
+  onSort,
+  currentlySorted,
+  searchHandler,
+}) => {
   const params = useParams();
   const select = useRef();
   const [sorting, setSorting] = useState(false);
 
   function sortingHandler(e) {
     setSorting(true);
-    onSort(e.target.value)
+    onSort(e.target.value);
   }
 
   function overrideSorting() {
@@ -22,7 +28,9 @@ export const Dashboard = ({ items, onSort, currentlySorted, searchHandler}) => {
   }
 
   return (
-    <div className={styles["dashboard"]}>
+    <article className={styles["dashboard"]}>
+      <h2>{params.category}</h2>
+      <NavCategories />
       <label className={styles["dashboard-label"]} htmlFor="sort-by">
         Sort by
       </label>
@@ -55,6 +63,6 @@ export const Dashboard = ({ items, onSort, currentlySorted, searchHandler}) => {
           alt="close icon"
         />
       </span>
-    </div>
+    </article>
   );
 };
