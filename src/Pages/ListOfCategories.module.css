@@ -1,5 +1,9 @@
-.items-list a:hover{
+.items-list a:hover {
 
-text-decoration: none;
+    text-decoration: none;
 
+}
+
+.items-list {
+    flex-basis: 70%;
 }

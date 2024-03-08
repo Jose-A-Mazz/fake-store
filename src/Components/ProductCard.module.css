@@ -1,7 +1,8 @@
 /* product-cards */
 
-.product-card{
+.product-card {
     grid-row: 2;
+    background-color: white;
     display: flex;
     border-radius: 4px;
     width: 250px;
@@ -13,12 +14,12 @@
 
 
 
-.product-image{
+.product-image {
     max-height: 200px;
     width: 60%;
 }
 
-.product-card-image-container{
+.product-card-image-container {
     text-align: center;
     padding: 10px;
     height: 200px;
@@ -26,16 +27,16 @@
 
 }
 
-.product-info{
+.product-info {
     line-height: 1rem;
 }
 
-.product-info > *{
+.product-info>* {
 
     margin-left: 12px;
 }
 
-.discount-paragraph{
+.discount-paragraph {
     color: white;
     border-radius: 4px;
     font-size: small;
@@ -48,18 +49,17 @@
 
 }
 
-.product-price-text{
+.product-price-text {
     font-size: x-large;
     font-weight: 600;
     color: rgb(87, 85, 85)
-
 }
 
-.product-title-text{
+.product-title-text {
     font-size: small;
 }
 
-.product-shiping-text{
+.product-shiping-text {
     font-size: small;
     color: rgb(4, 133, 79);
     font-weight: 700;

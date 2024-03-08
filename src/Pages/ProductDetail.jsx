@@ -7,15 +7,14 @@ import checkIcon from "../assets/check-icon.svg";
 import shippingIcon from "../assets/shipping-icon.svg";
 import { cartSliceActions } from "../store/cartSlice";
 import { useEffect, useState } from "react";
-import starFilled from "../assets/star-filled.svg";
-import halfFilledStar from "../assets/half-filled-star.svg";
-import starEmpty from "../assets/star-empty.svg";
+import "../App.css";
+import useStarGenerator from "../hooks/useStarGenerator.jsx";
 
 export const ProductDetail = () => {
-  const [stars, setStars] = useState([]);
   const dispatch = useDispatch();
   let isClothingCategory = false;
   const productData = useLoaderData();
+  const rating = useStarGenerator(productData.rating);
   let miniatures = [];
   let i = 0;
   while (i < 4) {
@@ -32,35 +31,6 @@ export const ProductDetail = () => {
   ) {
     isClothingCategory = true;
   }
-
-  const { rate } = productData.rating;
-  const intRate = Math.floor(rate);
-  console.log(rate);
-  const isDecimal = rate !== intRate;
-
-  const rating = [...Array(5)].map((_, i) => {
-    if (isDecimal && intRate + 1 === i + 1) {
-      const decimal = rate - intRate;
-      return (
-        <span>
-          {decimal.toFixed(1) > 0.5 ? (
-            <img className={styles["star-icon"]} src={starFilled} />
-          ) : (
-            <img className={styles["star-icon"]} src={halfFilledStar} />
-          )}
-        </span>
-      );
-    }
-    return i + 1 <= rate ? (
-      <span>
-        <img className={styles["star-icon"]} src={starFilled} />
-      </span>
-    ) : (
-      <span>
-        <img className={styles["star-icon"]} src={starEmpty} />
-      </span>
-    );
-  });
 
   return (
     <>
@@ -79,7 +49,7 @@ export const ProductDetail = () => {
             <h1>{productData.title}</h1>
             <div className={styles.rating}>
               <span>
-                {rate} {rating}
+                {productData.rating.rate} {rating}
               </span>
               <span>({productData.rating.count})</span>
             </div>
@@ -129,7 +99,7 @@ export const ProductDetail = () => {
                 null,
                 cartSliceActions.addToCart(productData)
               )}
-              className={styles["add-to-cart"]}
+              className="add-to-cart"
             >
               Add to Cart
             </button>

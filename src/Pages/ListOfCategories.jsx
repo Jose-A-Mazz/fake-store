@@ -9,6 +9,7 @@ import { queryClient } from "../utils/fetchAllProducts";
 import { fetchHomePageData } from "../utils/fetchHomePageData";
 import { motion } from "framer-motion";
 import LoadingIndicator from "../Components/LoadingIndicator";
+import CategoryWrapper from "../UI/CategoryWrapper";
 
 export const ListOfCategories = () => {
   const { data, error, isError, isLoading } = useQuery({
@@ -41,21 +42,23 @@ export const ListOfCategories = () => {
       {!isLoading && (
         <>
           <div style={{ height: "200px" }}></div>
-          <Dashboard
-            items={products}
-            onSort={sortingHandler}
-            currentlySorted={categoryState.sortType}
-            searchHandler={searchHandler}
-          />
-          <ul className={styles["items-list"]}>
-            {itemsArray.map((item) => (
-              <Link key={item.title} to={`${item.category}/${item.id}`}>
-                <motion.li layout>
-                  <ProductCard item={item} />{" "}
-                </motion.li>
-              </Link>
-            ))}
-          </ul>{" "}
+          <CategoryWrapper>
+            <Dashboard
+              items={products}
+              onSort={sortingHandler}
+              currentlySorted={categoryState.sortType}
+              searchHandler={searchHandler}
+            />
+            <ul className={styles["items-list"]}>
+              {itemsArray.map((item) => (
+                <Link key={item.title} to={`${item.category}/${item.id}`}>
+                  <motion.li layout>
+                    <ProductCard item={item} />{" "}
+                  </motion.li>
+                </Link>
+              ))}
+            </ul>{" "}
+          </CategoryWrapper>
         </>
       )}
     </>

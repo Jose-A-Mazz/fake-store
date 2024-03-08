@@ -4,9 +4,11 @@
     flex-direction: column;
     row-gap: 1rem;
     flex-wrap: wrap;
+    max-width: 30%;
     justify-self: start;
-    width: 30%;
     padding: 2rem;
+    height: fit-content;
+    flex: 0 1 30%;
 }
 
 .close-icon {
@@ -40,19 +42,16 @@
 
 .dashboard-label {
 
-    font-size: medium;
+    font-size: larger;
     color: rgb(104, 104, 104);
 }
 
-.dashboard select {
-    font-family: "poppins";
-    border: 1px solid rgb(163, 163, 163);
-}
-
+.dashboard select,
 .dashboard-search-bar {
     font-family: "poppins";
-    ;
-    border: 1px solid rgb(163, 163, 163);
+    padding: .7rem 1rem;
+    border-style: none;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.69);
 }
 
 .dashboard-search-bar:active {

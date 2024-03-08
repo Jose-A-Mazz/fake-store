@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { sortActions } from "../store/sortSlice";
 import closeIcon from "../assets/close.svg";
 import { useSearch } from "../hooks/useSeach";
+import useUpperCase from "../hooks/useUpperCase";
 import NavCategories from "./NavCategories";
 
 export const Dashboard = ({
@@ -14,6 +15,7 @@ export const Dashboard = ({
   searchHandler,
 }) => {
   const params = useParams();
+  const categoryTitle = useUpperCase(params.category);
   const select = useRef();
   const [sorting, setSorting] = useState(false);
 
@@ -29,12 +31,10 @@ export const Dashboard = ({
 
   return (
     <article className={styles["dashboard"]}>
-      <h2>{params.category}</h2>
+      <h2 style={{ padding: ".3rem 1rem" }}>
+        {categoryTitle || "All Categories"}
+      </h2>
       <NavCategories />
-      <label className={styles["dashboard-label"]} htmlFor="sort-by">
-        Sort by
-      </label>
-
       <select
         ref={select}
         onChange={sortingHandler}

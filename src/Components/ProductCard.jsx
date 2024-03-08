@@ -6,6 +6,7 @@ import { useState } from "react";
 export const ProductCard = ({ item }) => {
   return (
     <motion.div
+      layout
       transition={{ type: "spring" }}
       whileHover={{ boxShadow: "0px 0px 5px 6px rgba(0,0,0,0.1)", y: -3 }}
       className={styles["product-card"]}

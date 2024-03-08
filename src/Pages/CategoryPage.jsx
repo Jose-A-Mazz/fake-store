@@ -17,6 +17,7 @@ import LoadingIndicator from "../Components/LoadingIndicator";
 import { fetchHomePageData } from "../utils/fetchHomePageData";
 import { current } from "@reduxjs/toolkit";
 import usePathString from "../hooks/usePathString";
+import CategoryWrapper from "../UI/CategoryWrapper";
 
 export const CategoryPage = () => {
   const params = useParams();
@@ -62,7 +63,7 @@ export const CategoryPage = () => {
               {breadCrumb}
             </ul>
           </div>
-          <div style={{ display: "flex", columnGap: "5%", width: "100%" }}>
+          <CategoryWrapper>
             <Dashboard
               items={currentItems}
               onSort={sortingHandler}
@@ -76,7 +77,7 @@ export const CategoryPage = () => {
                 </Link>
               ))}
             </ul>
-          </div>
+          </CategoryWrapper>
         </>
       )}
     </>

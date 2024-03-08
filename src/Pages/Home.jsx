@@ -35,11 +35,11 @@ export const Home = () => {
 
         setTimeout(() => {
           ref.current.style.top = 0;
-          ref.current.style.transition = "none";
           ref.current.style.position = "sticky";
+          ref.current.style.transition = "none";
           ref.current.style.boxShadow = "0px 1px 2px 3px rgba(0,0,0,0.1)";
           scrollStarted = true;
-        }, 800);
+        }, 500);
       }
 
       if (scrollY === 0 && scrollStarted) {

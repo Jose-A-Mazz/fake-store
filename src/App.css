@@ -3,6 +3,15 @@
 }
 
 
+/* variables */
+:root {
+    --button-color: #7c73e6;
+
+}
+
+/* */
+
+
 body {
     font-family: "poppins";
     margin: 1px;
@@ -333,15 +342,34 @@ main>* {
 .dashboard-nav-list {
     display: flex;
     flex-direction: column;
-    font-size: larger;
+    font-size: large;
     font-weight: bold;
 }
 
-.activeLink {
+.dashboard-nav-list a {
     padding: .3rem 1rem;
+}
+
+.activeLink {
     background-color: #ececec;
 }
 
 a:hover {
     text-decoration: none;
+}
+
+
+
+/* add to cart button */
+
+.add-to-cart:hover {
+    opacity: 0.7;
+}
+
+.add-to-cart {
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    background-color: var(--button-color);
+    border: none;
 }
