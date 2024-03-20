@@ -20,13 +20,13 @@ export const Home = () => {
   // const { featuredItems } = useRouteLoaderData("home-page-category-data");
   let scrollStarted = false;
 
+  console.log("re render after data became stale");
+
   const { data, error, isError, isLoading } = useQuery({
     staleTime: 20000,
     queryKey: ["products", "home-products"],
     queryFn: fetchHomePageData,
   });
-
-  console.log(data);
 
   useEffect(() => {
     function eventFn() {
@@ -55,10 +55,9 @@ export const Home = () => {
 
   return (
     <>
-      <NavBar ref={ref} />
-      <main>
+      <NavBar ref={ref} items={data.products} />
+      <main id="home-main">
         {!isLoading && <MainHeader images={data.imagesUrl} />}
-        <Bento itemsByCategory={data.itemsByCategory} />
         <section className={styles["featured-items-section"]}>
           <h2 id="intersecting-element">What People are Buying</h2>
           {!isLoading && <ItemsCarousel items={data.featuredItems} />}

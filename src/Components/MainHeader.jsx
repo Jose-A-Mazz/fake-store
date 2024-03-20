@@ -11,6 +11,5 @@ import { useEffect } from "react";
 console.log(shopImage);
 
 export function MainHeader({ images }) {
-  console.log(images);
   return <Carousel images={images} />;
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styles from "./ProductCard.module.css";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import useStarGenerator from "../hooks/useStarGenerator";
 
 export const ProductCard = ({ item }) => {
   return (

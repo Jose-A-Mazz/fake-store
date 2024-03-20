@@ -33,6 +33,12 @@ const cartSlice = createSlice({
         state.totalItems += 1;
       }
     },
+
+    removeAllItems(state, action) {
+      state.cartItems = {};
+      state.totalAmount = 0;
+      state.totalItems = 0;
+    },
   },
 });
 const cartSliceActions = cartSlice.actions;

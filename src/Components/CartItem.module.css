@@ -1,4 +1,5 @@
 .cart-item-card {
+  flex: 1 0 100%;
   border-radius: 4px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
   border: 1px solid rgb(235, 235, 235);
@@ -19,7 +20,7 @@
 
 .price {
   font-weight: bold;
-  font-size: 19px;
+  font-size: 15px;
 }
 
 .amount-section {

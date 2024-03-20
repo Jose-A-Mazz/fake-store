@@ -24,6 +24,7 @@ export const ListOfCategories = () => {
 
   const { sortingHandler, categoryState, searchHandler, toSort } =
     useSortAndSearch(products || []);
+
   let itemsArray = [];
 
   if (categoryState.searchedItemsArray.length > 0) {

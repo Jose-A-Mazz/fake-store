@@ -1,5 +1,6 @@
 import { useReducer, useEffect, useState } from "react";
 
+let searchEnabled = false;
 const initialState = {
   sortType: "",
   searchedItemsArray: [],
@@ -11,11 +12,12 @@ export default function useSort(items) {
 
   useEffect(() => {
     let timer = setTimeout(() => {
+      console.log("I am executing");
       dispatcher({ type: "SEARCH", value: { searchInput, array: items } });
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [searchInput, items]);
+  }, [searchInput]);
 
   function searchHandler(e) {
     setSearchInput(e.target.value);
@@ -29,6 +31,13 @@ export default function useSort(items) {
 
       //tratar de implentar algoritmo de palabras completas. Hasta ahora si pongo "mens"
       //me busca también "womens"
+
+      if (!searchQuery)
+        return {
+          ...state,
+          searchedItemsArray,
+        };
+
       searchedItemsArray = array.filter((item) => {
         // let inDescription = item.description.includes(searchQuery);
 

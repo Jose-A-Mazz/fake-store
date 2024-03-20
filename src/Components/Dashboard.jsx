@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import styles from "./Dashboard.module.css";
+import "../App.css";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { sortActions } from "../store/sortSlice";
@@ -7,6 +7,7 @@ import closeIcon from "../assets/close.svg";
 import { useSearch } from "../hooks/useSeach";
 import useUpperCase from "../hooks/useUpperCase";
 import NavCategories from "./NavCategories";
+import { SearchBar } from "../UI/SearchBar";
 
 export const Dashboard = ({
   items,
@@ -30,7 +31,7 @@ export const Dashboard = ({
   }
 
   return (
-    <article className={styles["dashboard"]}>
+    <article className="dashboard">
       <h2 style={{ padding: ".3rem 1rem" }}>
         {categoryTitle || "All Categories"}
       </h2>
@@ -46,22 +47,13 @@ export const Dashboard = ({
         <option value="more expensive">More Expensive</option>
         <option value="rating">Rating</option>
       </select>
-      <input
-        onChange={searchHandler}
-        type="text"
-        placeholder="Search..."
-        className={styles["dashboard-search-bar"]}
-      />
+      <SearchBar onChange={searchHandler} />
       <span
-        className={!sorting ? styles["override-sorting"] : ""}
+        className={!sorting ? "override-sorting" : ""}
         onClick={overrideSorting}
       >
         {currentlySorted}
-        <img
-          className={styles["close-icon"]}
-          src={closeIcon}
-          alt="close icon"
-        />
+        <img className="close-icon" src={closeIcon} alt="close icon" />
       </span>
     </article>
   );

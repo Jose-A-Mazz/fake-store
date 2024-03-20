@@ -5,6 +5,12 @@ export default function Carousel({ images }) {
   const slide = useRef();
   const [indexOfImage, setIndexOfImage] = useState(0);
   const [carouselStarted, setCarouselStarted] = useState(false);
+  let messages = [
+    "All our Products",
+    "Women's Clothing",
+    "Electronic Items",
+    "Men's Clothing",
+  ];
 
   const styleObject = {
     height: "80vh",
@@ -48,13 +54,19 @@ export default function Carousel({ images }) {
             transform: `translateX(-${indexOfImage * 100}%)`,
           }}
         >
-          {images.map((image) => (
+          {images.map((image, index) => (
             <div
+              className="slide"
               style={{
-                backgroundImage: `url(${image.url})`,
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(${image.url})`,
                 ...styleObject,
               }}
-            ></div>
+            >
+              <div className="slide-message">
+                <h2 className="slide-title">{messages[index]}</h2>
+                <button className="shop-now">Shop Now →</button>
+              </div>
+            </div>
           ))}
         </div>
         <button onClick={moveLeft} className="carousel-next">
@@ -72,9 +84,7 @@ export default function Carousel({ images }) {
                 className={
                   index === indexOfImage ? "dot-btn current-img-btn" : "dot-btn"
                 }
-              >
-                .
-              </button>
+              ></button>
             );
           })}
         </div>
