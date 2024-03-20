@@ -1,10 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import LinkWrapper from "../UI/LinkWrapper";
 
 function SearchResultItem({ item }) {
   return (
-    <Link className="item-link" to={`categories/${item.category}/${item.id}`}>
+    <LinkWrapper item={item}>
       <motion.li
         className="search-result-item"
         key={item.title}
@@ -51,7 +52,7 @@ function SearchResultItem({ item }) {
           </p>
         </div>
       </motion.li>
-    </Link>
+    </LinkWrapper>
   );
 }
 

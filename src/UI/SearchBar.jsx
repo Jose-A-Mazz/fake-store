@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useMotionValueEvent, useScroll } from "framer-motion";
-import { createPortal } from "react-dom";
 import { SlMagnifier } from "react-icons/sl";
 import useSort from "../hooks/useSortAndSearch";
-import SearchResultItem from "../Components/SearchResultItem";
 import SearchResultsDialog from "../Components/SearchResultsDialog";
 
 export const SearchBar = ({ items, inNavBar }) => {
@@ -12,8 +9,19 @@ export const SearchBar = ({ items, inNavBar }) => {
     categoryState: { searchedItemsArray },
   } = useSort(items || []);
   const searchBox = useRef();
+  const [searchBoxPosition, setSearchBoxPosition] = useState({
+    top: 0,
+    left: 0,
+  });
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (searchBox.current) {
+      setSearchBoxPosition({
+        top: searchBox.current.getBoundingClientRect().bottom,
+        left: searchBox.current.getBoundingClientRect().left,
+      });
+    }
+  }, [searchBox.current]);
 
   return (
     <>
@@ -32,11 +40,14 @@ export const SearchBar = ({ items, inNavBar }) => {
           className={inNavBar ? "navbar-search-bar" : "dashboard-search-bar"}
         />
       </div>
-      {inNavBar && (
-        <SearchResultsDialog items={searchedItemsArray}>
-          <SearchResultsDialog.List />
-        </SearchResultsDialog>
-      )}
+      <SearchResultsDialog
+        items={searchedItemsArray}
+        position={searchBoxPosition}
+      >
+        <SearchResultsDialog.List>
+          <SearchResultsDialog.Label />
+        </SearchResultsDialog.List>
+      </SearchResultsDialog>
     </>
   );
 };

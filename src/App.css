@@ -270,7 +270,11 @@ main>* {
     flex: 0 0 0;
     cursor: pointer;
     height: 250px;
-    width: clamp(100px, 7vw, 300px);
+    width: 100%;
+}
+
+.item-link{
+    width: 30%;
 }
 
 .item-link:hover {
@@ -305,10 +309,12 @@ main>* {
     height: 100vh;
     right: -100%;
     width: 500px;
-    position: absolute;
+    position: fixed;
+    top: 0;
     z-index: 20000;
     background-color: white;
-    box-shadow: 10px 0 15px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 0 15px 15px rgba(0, 0, 0, 0.2);
+    border-left: var(--boder-light-grey)
 }
 
 
@@ -876,3 +882,15 @@ a:hover {
 }
 
 /* button */
+
+
+/* backdrop */
+
+.backdrop{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    backdrop-filter: blur(4px);
+}
